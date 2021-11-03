@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:batch="http://www.mulesoft.org/schema/mule/batch"
+	xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<file:config name="File_Config" doc:name="File Config" doc:id="0cbcfe2f-34b5-47fc-b2c2-08eeb5fa0f40" >
+		<file:connection workingDir="C:\Users\Haseeb The Great\Downloads\A\w\demo20211103v9\LearningMuleSoft\input" />
+	</file:config>
+	<file:config name="File_Config1" doc:name="File Config" doc:id="5fd94491-4f8a-4f6e-8c52-1640b2d213f2" >
+		<file:connection workingDir="C:\Users\Haseeb The Great\Downloads\A\w\demo20211103v9\LearningMuleSoft\input" />
+	</file:config>
+	<file:config name="File_Config2" doc:name="File Config" doc:id="bce219cb-9727-4c4d-97fd-ff7dec6ce5cf" >
+		<file:connection workingDir="C:\Users\Haseeb The Great\Downloads\A\w\demo20211103v9\LearningMuleSoft\output" />
+	</file:config>
+	<flow name="demo20211103v9Flow" doc:id="0950dfcf-008b-49bc-b438-8ecb8da32e73" >
+		<file:listener doc:name="On New or Updated File" doc:id="72b89fc9-d6e5-42fd-a939-81688dd76d81" config-ref="File_Config1" directory="C:\Users\Haseeb The Great\Downloads\A\w\demo20211103v9\LearningMuleSoft\input" autoDelete="true" moveToDirectory="C:\Users\Haseeb The Great\Downloads\A\w\demo20211103v9\LearningMuleSoft\output">
+			<scheduling-strategy >
+				<fixed-frequency frequency="5" timeUnit="SECONDS" />
+			</scheduling-strategy>
+		</file:listener>
+		<ee:transform doc:name="Transform Message" doc:id="b0617403-14be-44be-a0c2-0734de8de093" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<batch:job jobName="Batch_Job" doc:id="9bd2349e-356b-4482-8e18-1152970ac3cf" >
+			<batch:process-records >
+				<batch:step name="Batch_Step1" doc:id="95fb35df-ab88-4dc2-85bb-fc5f4780311b" >
+					<set-variable value='#[payload.policyID ++ ".csv"]' doc:name="Set Variable" doc:id="64fdae4b-a65a-4d70-b979-9728a842a85d" variableName="fileName"/>
+					<ee:transform doc:name="Transform Message" doc:id="4098622c-b1aa-45a8-b183-ab90f9746f9c" >
+						<ee:message >
+							<ee:set-payload ><![CDATA[%dw 2.0
+output application/csv
+---
+payload]]></ee:set-payload>
+						</ee:message>
+					</ee:transform>
+					<file:write doc:name="Write" doc:id="ea91797b-2945-4feb-b132-938c799f3910" config-ref="File_Config2" path='#[vars.fileName]'/>
+					<logger level="INFO" doc:name="Logger" doc:id="7c96e537-2032-4b45-83df-2b498205bf17" message="Batch Step 1 Logger"/>
+				</batch:step>
+				<batch:step name="Batch_Step" doc:id="1aff2488-b612-4087-a3c4-1871c93d7ea8" >
+					<logger level="INFO" doc:name="Logger" doc:id="57717c7b-8f62-480e-9686-010308446b20" message="Batch Step 2 Logger"/>
+				</batch:step>
+			</batch:process-records>
+		</batch:job>
+	</flow>
+</mule>
