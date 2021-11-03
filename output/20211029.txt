@@ -1,0 +1,97 @@
+==========================================
+COLLIBRA UNIVERSITY NOTES
+===========================================
+Collibra Data Steward Learning Path
+	Getting Started: Communities, Domains and Stewardship
+		- Operating model consists of council with responsibilities and roles, defined set of procedures with execution plan or workload, catalogs of assets with their types, characteristics and relationships
+		- Stewardship allows to view lines of business, people involved in said business, owners of assets and stakeholders
+		- Common approaches for data governance structure: centralized, decentralized and federated
+		- Centralized: single organization @ corporate level or small/medium business with limited business lines --> flat structure with 1 community and centrally managed domains
+		- Decentralized: large companies where business units have own governance programs and no corporate alignment --> each division setup as independent organization
+		- Federated: large companies with governance programs with corporate alignment (hybrid) --> minimizes overhead and redundancy through economies of scale
+		- Communities: group responsible over specific assets
+		- Domains: logical grouping of assets according to function, project or knowledge area
+		- Stewardship: collaborate with subject matter experts and data owners across organization through role-based dashboards and interactive views (technical vs data vs privacy)
+		
+	Getting Started: Assets and Asset Types
+		- Business vs data vs governance vs technology assets and help desk issues
+		- Assets: building block of data governance initiative and represent structural concepts of operating model --> often grouped together based on function, project or knowledge area
+		- 2 characteristics for asset: attribute --> literal value which captures info about asset and instance of 1 attribute type, relation --> how 2 assets compare to one another (bidirectional)
+	
+	Getting Started: Business Glossary
+		- Collibra Business Glossary Application: govern business terms --> asset types, their attributes, taxonomy and relations, status of adoption
+		- Goal is to clearly identify asset to differentiate from other assets while making definition as readable as possible --> specific and disambiguating, concise, accessible to the full breadth of target audience
+Import/export using excel with configurations for batch updates
+
+==========================================
+MULESOFT NOTES
+===========================================
+
+https://www.udemy.com/course/mulesoft-mule4-for-beginners-developers-with-35-live-demo/
+	- Middleware: software connects two separate applications
+	- Application integration(A2A): integrate company-managed applications together
+	- B2B integration: integrate customer, provider and partner interfaces with data resources and company-managed applications
+	- Cloud Integration: integrate with and between cloud services and applications
+	- Components in MuleSoft:
+		○ Runtime plane - MuleSoft runtime
+		○ Control plane - MuleSoft AnyPoint platform
+			§ Design center: dev environment for Mule application and API specification
+			§ AnyPoint Exchange: marketplace for connectors, templates, examples and APIs --> think of it like a marketplace for internal and external practices
+			§ Runtime Manager: used to deploy and manage all Mule applications
+			§ API Manager: Set policies, access and group APIs and manage traffic
+			§ Access Management: create account and configure permissions within organization
+			§ AnyPoint Monitoring: visibility into integrations across app network for feedback from Mule flows
+	- AnyPoint Studio: connect data to apps or build APIs graphically --> IDE
+	- DataWeave: MuleSoft expression language for accessing and transforming data that travels through Mule app
+	
+	
+
+Session 1 : What is MuleSoft? | MuleSoft For Absolute Beginners
+	- Salesforce company --> Integration platform --> API Management Platform
+	- Runtime engine of Anytime Platform used to connect applications together
+
+Session 2 : Designing APIs | RAML | RESTful Services|MuleSoft For Absolute Beginners
+	- 24 minute mark is where start working on example API
+	- RAML:
+		○ /search:
+			get:
+				queryParameters:
+					keyword:
+						description:
+						type: string
+						required: true (default)
+						minlength: 3
+						maxlength: 10
+				responses:
+					200:
+						body:
+							application/json:
+								example:
+									{"message":"result returned successful"}
+									(or could be '!include directory/file.raml' if want to import from separate file) 
+		○ /news:
+			post:
+				queryParameters:
+					country:
+						required: true (default)
+				body:
+					application/json:
+						properties:
+						(or could be 'type: !include directory/file.raml' if want to import from separate file)
+							username:
+								required: true
+								maxlength:10
+								minlength:5
+							password:
+								required: true
+								maxlength:10
+								minlength:5
+				responses:
+					200:
+						body:
+							application/json:
+								example:
+									{"message":"result returned successful"}
+		○ Used to create variables for shorter code
+		types:
+aName: !include directory/file.raml

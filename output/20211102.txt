@@ -1,0 +1,57 @@
+Foundation of Data Governance Learning Path
+	Data Governance Readiness
+		- Helps provide data quality, data policies, business process management, risk management, business policies and regulatory compliance
+		- Objectives: reduce risk with managing and using data assets, improve our competitive position and competitive advantage, increase our business and revenue opportunities through our data assets
+		- Industry challenges: meeting regulatory reporting requirements, access to data for analytics to meet regulations, identifying the ownership for the data lifecycle management
+		- Traditional priorities of data governance: Right people executing the right processes with the right data at the right time with the right technology
+		- Use case: A short statement of the outcomes we achieve to desire. They address the major business value propositions from the stakeholder and executive perspective
+		- Phase 1: Build business case and roadmap --> Create Data Governance Education and Schedule --> Implement Data Governance Principles --> roll out communications and Promotions Schedule
+		- Phase 2: Perform Iterative Data Governance Operations
+		- Phase 3: Measure and Enhance the Data Governance Program
+		- Steering committee: Executive level --> Strategic responsibilities
+		- Functional Working Group: Senior + Middle managers --> Cross-functional communication and operations
+		- Data owners and data stewards: Representing data domains or functions
+		- Data Governance Team: data stewards, data owners, data custodians
+			§ Drives the processes, coordinates resources, manages technology, measures success and compliance
+			§ Made of: steering committee, working team, data content owners, data stewards, data consumers
+		- Data consumers: drive innovations, significant accountabilities, responsibilities for success
+		- Use case: business risk, business value and return, cost
+	
+	The Value of Data
+		- Value of data --> blocked --> data brawl --> organize --> processes --> metrics
+		- Issue management process: report --> SLA priority --> triage --> impact assessment --> assign issue --> candidate solution --> prioritize solution --> implement solution
+	
+	Data Governance Best Practices
+		- Focus on Operating Model: define roles and responsibilities, identify stakeholders, defining the framework
+		- Identify Data Domains: what does report mean and where is the data coming from --> context for report
+		- Identify Critical Data Elements within Domain: narrow the focus of data governance program --> identify critical information within organization --> start with initial reports and scale accordingly
+		- Define Control Measurements
+			§ Define automated workflow processes and thresholds for approval, escalation, review, voting, issue management and more
+			§ Apply workflow processes to the governance structure, data domains and critical data elements
+			§ Develop reporting on the progress for steps 1-4
+			§ Capture feedback through automated workflow processes
+	
+	Find, Understand and Trust Your Data
+		- 3 objectives: know where data comes from, know what it means, know that its right (find, understand and trust data)
+		- Data governance: defined process an organization follows for assessing, managing, using, improving, monitoring, maintaining and protecting organizational data to drive business outcomes
+		- Find: catalog, data dictionary
+		- Understand: business glossary, reference data
+		- Trust: policy manager, data helpdesk, stewardship
+	
+	Establishing Roles and Responsibilities with RACI
+		- Form data governance council or steering group to initiate program
+		- Identify champions in different lines of business
+		- Increase adoption in different LOB across the enterprise
+		- Align critical business outcomes of the organization
+		- Identify key use cases --> Conduct risk assessment --> Define project scope
+		- Data Steward (information advocate):
+			§ Align business producers with consumers and support those lines of communication
+			§ Promote data citizenship , roles and responsibilities
+			§ Track changes over time and conduct necessary impact analysis when changes occur in data sets
+			§ Resolve issues across different domains  and resolve them quickly
+			§ Ensuring the right person has access to the right data at the right time and its trustworthy for decision making
+		- Technical Steward (architect or solution engineer):
+			§ Translate business requirements into technical architecture to be implemented within organization
+			§ Understand technical landscape of different source system
+			§ Map out different integration templates that will need to take place
+			§ Streamline day-to-day operations to ensure analytics, BI, and reporting needs of business users are available to quickly find the data to do their job

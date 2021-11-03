@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<file:config name="File_Config" doc:name="File Config" doc:id="f192de8f-8eaf-41f2-8ce8-55fad55a7895" >
+		<file:connection workingDir="C:\Users\Haseeb The Great\Downloads\A\w\demo20211103v5\LearningMuleSoft\input" />
+	</file:config>
+	<flow name="FileProcessingFlow" doc:id="9de3ddf5-7846-4ee8-b069-93728a0092a7" >
+		<file:listener doc:name="On New or Updated File" doc:id="38e86645-466c-4d6d-a197-c45a63d9cc82" config-ref="File_Config" directory="C:\Users\Haseeb The Great\Downloads\A\w\demo20211103v5\LearningMuleSoft\input" autoDelete="true" moveToDirectory="C:\Users\Haseeb The Great\Downloads\A\w\demo20211103v5\LearningMuleSoft\output">
+			<scheduling-strategy >
+				<fixed-frequency frequency="5" timeUnit="SECONDS"/>
+			</scheduling-strategy>
+		</file:listener>
+		<logger level="INFO" doc:name="Logger" doc:id="3db27b29-6f2c-4d19-bfad-2fc179dd195f" message="#[payload]"/>
+	</flow>
+</mule>
