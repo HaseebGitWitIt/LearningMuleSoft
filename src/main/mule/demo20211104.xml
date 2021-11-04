@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="d4328fdc-3f5d-46aa-a998-b8d764fc1b0e" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="ErrorHandlingDemoFlow" doc:id="4c396e08-1a53-458d-8256-078efdc7847e" >
+		<http:listener doc:name="/GET hello" doc:id="dade04ce-b589-4d34-87fc-a434c2e11625" config-ref="HTTP_Listener_config" path="/hello"/>
+		<raise-error doc:name="Raise error" doc:id="3a85310d-1778-4b51-a398-2422946e815a" type="MULE:VALIDATION" description="Validation error"/>
+		<logger level="INFO" doc:name="Logger" doc:id="3d5c21ce-e76a-4dd0-8c56-6207755e9842" message="Main flow  logger."/>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="b23757f9-bae2-4bf2-ba83-3a837782f48d" >
+				<logger level="INFO" doc:name="Logger" doc:id="0cb3a074-789d-4f7b-94cd-302b3dcd285d" message="On error propagate handler 1"/>
+				<logger level="INFO" doc:name="Logger" doc:id="7514db4f-7628-46a0-aef7-6d6c3f2a00ae" message="On error propagate handler 2"/>
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+	<flow name="Copy_of_ErrorHandlingDemoFlow" doc:id="800dd294-1ee4-4e3c-b285-2e297171a346" >
+		<http:listener doc:name="Copy_of_/GET helloo" doc:id="84b3e4e5-45d7-4fd0-9477-d50668d54fc1" config-ref="HTTP_Listener_config" path="/helloo" />
+		<raise-error doc:name="Copy_of_Raise error" doc:id="25b38fa6-be81-4c95-b050-733e0cd3f438" type="MULE:VALIDATION" description="Validation error" />
+		<logger level="INFO" doc:name="Copy_of_Logger" doc:id="e3974ef5-48af-4279-baa1-71a66f4d9ac9" message="Main flow  logger." />
+		<error-handler>
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="14dd65e9-f289-4fb2-9568-90b300d31a44" >
+				<logger level="INFO" doc:name="Logger" doc:id="755c605e-aabc-44b8-a73f-7700971988ab" message="Error Continue Logger 1"/>
+				<logger level="INFO" doc:name="Logger" doc:id="1af1c611-ae05-4603-a279-0f8003688aee" message="Error Continue Logger 2"/>
+			</on-error-continue>
+		</error-handler>
+	</flow>
+</mule>
