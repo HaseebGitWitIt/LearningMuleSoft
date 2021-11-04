@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="8152edee-63bb-4d7e-a073-9739ddcaac8d" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="9c8416af-0c8a-47a6-8faa-b4600fd93636" basePath="/api/users">
+		<http:request-connection host="reqres.in" protocol="HTTPS"/>
+	</http:request-config>
+	<ee:object-store-caching-strategy name="Caching_Strategy" doc:name="Caching Strategy" doc:id="6a522d02-c68e-42a8-af23-4bc575553ffb" keyGenerationExpression="#[attributes.queryParams.employeeID]" />
+	<flow name="demo20211104v5Flow" doc:id="5a29cc97-af70-41fb-a2ec-9d10feb31b5c" >
+		<http:listener doc:name="Listener" doc:id="f8fdd44c-36e6-4165-8616-5360d601ad24" config-ref="HTTP_Listener_config" path="/employee"/>
+		<ee:cache doc:name="Cache" doc:id="619d63d3-50dd-41a4-83be-5b1e205854fe" cachingStrategy-ref="Caching_Strategy">
+			<http:request method="GET" doc:name="Request" doc:id="30c54dcf-5030-4d15-a1f2-7f8ad62092c7" config-ref="HTTP_Request_configuration" path="#[attributes.queryParams.employeeID]" />
+			<logger level="INFO" doc:name="Logger" doc:id="a6b325e9-4bd2-4c18-ab44-a5bd01059573" message="Cache Miss"/>
+		</ee:cache>
+		<logger level="INFO" doc:name="Logger" doc:id="1b34411a-a710-42b3-8e7e-50cdde301f26" message="Cache Hit"/>
+	</flow>
+</mule>
