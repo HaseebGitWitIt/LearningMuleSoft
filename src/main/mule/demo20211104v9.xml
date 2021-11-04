@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="7c3d7a78-39f6-4034-bded-9cd775f0524d" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="dc6a9685-2da9-4394-bf04-da464fe2cf66" >
+		<http:request-connection host="dummy.restapiexample.com" />
+	</http:request-config>
+	<flow name="demo20211104v9Flow" doc:id="9df100aa-d80c-4a19-92e9-c789fa1f0638" >
+		<http:listener doc:name="Listener" doc:id="6ba7956e-d6d2-41e2-b00e-3122b7adf00f" config-ref="HTTP_Listener_config" path="/test"/>
+		<until-successful maxRetries="5" doc:name="Until Successful" doc:id="d8a31d29-0040-442a-82b7-6771093deda6" millisBetweenRetries="6000">
+			<http:request method="GET" doc:name="Request" doc:id="dd1bbf4a-f51d-44c5-9db8-237984425636" config-ref="HTTP_Request_configuration" path="/api/v1/employees"/>
+			<logger level="INFO" doc:name="Logger" doc:id="cd654b02-a68d-4b81-92a7-8eb67044b145" message="Inside Until Successful Scope"/>
+		</until-successful>
+	</flow>
+</mule>
