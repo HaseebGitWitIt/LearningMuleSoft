@@ -8,9 +8,6 @@ http://www.mulesoft.org/schema/mule/tracing http://www.mulesoft.org/schema/mule/
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="2d7d6db6-2e49-41f5-b008-a1dbf476c95d" >
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
-	<flow name="demo20211104v4Flow1" doc:id="211b5dfc-9a59-4b80-853d-4ce95d3619ef" >
-		<tracing:set-logging-variable doc:id="f6bfc695-c744-4200-afb2-58bcb1fcd3b7" />
-	</flow>
 	<flow name="demo20211104v4Flow" doc:id="603a9485-0e6e-4134-bf9b-cafceecda04c" >
 		<http:listener doc:name="Listener" doc:id="f2c4d257-6cc8-4207-a6c1-18a4cb35574f" config-ref="HTTP_Listener_config" path="/test"/>
 		<round-robin doc:name="Round Robin" doc:id="dd66f012-f185-4be7-81f8-935ece29a076" >
