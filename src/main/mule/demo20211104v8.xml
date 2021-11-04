@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="b1d7221f-78fe-47a1-b479-f7ef754c490b" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="demo20211104v8Flow" doc:id="9e969585-5293-449a-803a-a41edaa5d4b3" >
+		<http:listener doc:name="Listener" doc:id="a6343717-caf6-49b9-aea5-8533771d77ba" config-ref="HTTP_Listener_config" path="/firstSuccessful"/>
+		<first-successful doc:name="First Successful" doc:id="f0ef8575-c1cc-4d83-9369-a83931167aca" >
+			<route >
+				<logger level="INFO" doc:name="Logger" doc:id="83a65525-9657-4c75-ae82-b857c607cc5c"/>
+				<raise-error doc:name="Raise error" doc:id="8740d5d2-f9c6-456a-adc1-202d4462173c" type="MULE:VALIDATION"/>
+			</route>
+			<route >
+				<logger level="INFO" doc:name="Logger" doc:id="1b819d2c-a04c-47d5-a421-2c03f28576e3" message="Log 2"/>
+			</route>
+			<route >
+				<logger level="INFO" doc:name="Logger" doc:id="83e35a1b-12a2-4567-aa6f-df13729f7655" message="Log 3"/>
+			</route>
+		</first-successful>
+	</flow>
+</mule>
