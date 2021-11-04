@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:java="http://www.mulesoft.org/schema/mule/java" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/java http://www.mulesoft.org/schema/mule/java/current/mule-java.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="27f278b7-1fb9-4dc1-aac3-9148efe8ab89" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="demo20211104v7Flow" doc:id="e3198fbf-da0a-49b4-b32e-04bb5c5efc03" >
+		<http:listener doc:name="Listener" doc:id="05248696-bbf0-4286-85e3-37cc54802d09" config-ref="HTTP_Listener_config" path="/static"/>
+		<java:invoke-static method="concat(java.lang.String,java.lang.String)" doc:name="Invoke static" doc:id="1880b46b-8c9e-4b56-8827-08f1aebead6a" class="demo20211104v7.StringOperations">
+			<java:args ><![CDATA[#[output application/java
+---
+{
+	a:attributes.queryParams.firstName as String,
+	b:attributes.queryParams.lastName as String
+}]]]></java:args>
+		</java:invoke-static>
+	</flow>
+	<flow name="Copy_of_demo20211104v7Flow" doc:id="643f6246-d299-4efd-a6bf-f29a3204df6e" >
+		<http:listener doc:name="Copy_of_Listener" doc:id="acada581-08e7-4ba6-ad34-26fbe1a4c8a9" config-ref="HTTP_Listener_config" path="/notStatic" />
+		<java:new constructor="StringOperations()" doc:name="New" doc:id="4af3536f-55ef-4525-bb3c-7d8f4b480a58" class="demo20211104v7.StringOperations" target="varA"/>
+		<java:invoke method="multiConcat(java.lang.String,java.lang.String,java.lang.String)" doc:name="Invoke" doc:id="2557ac35-f2af-465d-90e2-3ff83f96c861" instance="#[vars.varA]" class="demo20211104v7.StringOperations">
+			<java:args ><![CDATA[#[output application/java
+---
+{
+	a:attributes.queryParams.firstName as String,
+	b:attributes.queryParams.lastName as String,
+	c:attributes.queryParams.middleName as String
+}]]]></java:args>
+		</java:invoke>
+	</flow>
+</mule>
